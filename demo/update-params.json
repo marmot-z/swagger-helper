@@ -1,0 +1,112 @@
+{
+    "_id": "60db2616d59d7f011f417bab",
+    "prodUrl": "/test/interface1",
+    "devUrl": "/test/interface1",
+    "name": "测试创建接口",
+    "group": "5fd975b50d276ef7764b6009",
+    "desc": "",
+    "creator": "60c2c4ece29bc90126805c20",
+    "manager": "60c2c4ece29bc90126805c20",
+    "url": "/test/interface1",
+    "__v": 0,
+    "status": 1,
+    "isDeleted": false,
+    "modifiedTime": "1624974870537",
+    "createTime": "1624974870537",
+    "follower": [
+        "60c2c4ece29bc90126805c20"
+    ],
+    "options": {
+        "response": [
+            {
+                "status": 200,
+                "statusText": "status1",
+                "example": {
+                    "data": {
+                        "successful": true,
+                        "msg": "无"
+                    }
+                },
+                "params": [
+                    {
+                        "key": "data",
+                        "type": "object",
+                        "required": true,
+                        "comment": "数据",
+                        "params": [
+                            {
+                                "key": "successful",
+                                "type": "boolean",
+                                "required": true,
+                                "example": true,
+                                "comment": "是否成功"
+                            },
+                            {
+                                "key": "msg",
+                                "type": "string",
+                                "required": true,
+                                "example": "无",
+                                "comment": "消息"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "method": "get",
+        "delay": 0,
+        "params": {
+            "query": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": true,
+                    "example": "wangwu",
+                    "comment": "密码",
+                    "maxLength": 11
+                },
+                {
+                    "key": "age",
+                    "type": "number",
+                    "required": true,
+                    "example": 23,
+                    "comment": "年龄"
+                }
+            ],
+            "body": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": true,
+                    "comment": "姓名",
+                    "example": "zhangsan",
+                    "maxLength": 12
+                },
+                {
+                    "key": "password",
+                    "type": "string",
+                    "required": false,
+                    "example": "1111",
+                    "comment": "密码",
+                    "maxLength": 4
+                }
+            ],
+            "path": []
+        },
+        "responseIndex": 0,
+        "examples": {
+            "query": null,
+            "body": null,
+            "path": null
+        },
+        "headers": {
+            "example": null,
+            "params": []
+        },
+        "proxy": {
+            "mode": 0
+        }
+    },
+    "history": null,
+    "author": "zhangxunwei@dxy.cn"
+}
