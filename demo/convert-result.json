@@ -1,0 +1,256 @@
+{
+    "prodUrl": "/demo/method1",
+    "devUrl": "/demo/method1",
+    "url": "/demo/method1",
+    "group": "",
+    "desc": "",
+    "creator": null,
+    "manager": null,
+    "follower": [],
+    "name": "【测试分类】 + 测试方法",
+    "options": {
+        "proxy": {
+            "mode": 0
+        },
+        "response": [
+            {
+                "status": 200,
+                "statusText": "OK",
+                "example": {
+                    "code": 200,
+                    "data": [
+                        {
+                            "address": "场所1",
+                            "amount": 0,
+                            "names": [
+                                "张三",
+                                "李四"
+                            ],
+                            "time": "2021-10-09"
+                        }
+                    ],
+                    "msg": "错误"
+                },
+                "params": [
+                    {
+                        "key": "code",
+                        "type": "integer",
+                        "required": false,
+                        "comment": "code",
+                        "example": 200
+                    },
+                    {
+                        "key": "data",
+                        "type": "array",
+                        "required": false,
+                        "comment": "data",
+                        "example": [],
+                        "items": {
+                            "type": "object",
+                            "required": false,
+                            "comment": "",
+                            "example": "",
+                            "params": [
+                                {
+                                    "key": "address",
+                                    "type": "string",
+                                    "required": false,
+                                    "comment": "address",
+                                    "example": "场所1"
+                                },
+                                {
+                                    "key": "amount",
+                                    "type": "number",
+                                    "required": false,
+                                    "comment": "amount",
+                                    "example": 23.6
+                                },
+                                {
+                                    "key": "names",
+                                    "type": "array",
+                                    "required": false,
+                                    "comment": "names",
+                                    "example": "张三,李四",
+                                    "items": {
+                                        "type": "string",
+                                        "required": false,
+                                        "comment": "",
+                                        "example": ""
+                                    }
+                                },
+                                {
+                                    "key": "time",
+                                    "type": "string",
+                                    "required": false,
+                                    "comment": "time",
+                                    "example": "2021-10-09"
+                                }
+                            ]
+                        },
+                        "params": [
+                            {
+                                "key": "address",
+                                "type": "string",
+                                "required": false,
+                                "comment": "address",
+                                "example": "场所1"
+                            },
+                            {
+                                "key": "amount",
+                                "type": "number",
+                                "required": false,
+                                "comment": "amount",
+                                "example": 23.6
+                            },
+                            {
+                                "key": "names",
+                                "type": "array",
+                                "required": false,
+                                "comment": "names",
+                                "example": "张三,李四",
+                                "items": {
+                                    "type": "string",
+                                    "required": false,
+                                    "comment": "",
+                                    "example": ""
+                                }
+                            },
+                            {
+                                "key": "time",
+                                "type": "string",
+                                "required": false,
+                                "comment": "time",
+                                "example": "2021-10-09"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "msg",
+                        "type": "string",
+                        "required": false,
+                        "comment": "msg",
+                        "example": "错误"
+                    }
+                ]
+            },
+            {
+                "status": 401,
+                "statusText": "Unauthorized",
+                "example": {},
+                "params": {}
+            },
+            {
+                "status": 403,
+                "statusText": "Forbidden",
+                "example": {},
+                "params": {}
+            },
+            {
+                "status": 404,
+                "statusText": "Not Found",
+                "example": {},
+                "params": {}
+            }
+        ],
+        "headers": {
+            "example": null,
+            "params": []
+        },
+        "method": "get",
+        "delay": 0,
+        "examples": {
+            "query": {
+                "doubleNum": "",
+                "longNum": "",
+                "name": "",
+                "num": 233,
+                "shortNum": ""
+            },
+            "body": {
+                "doubleNum": "",
+                "longNum": "",
+                "name": "",
+                "num": 233,
+                "shortNum": ""
+            },
+            "path": []
+        },
+        "params": {
+            "query": [
+                {
+                    "key": "doubleNum",
+                    "type": "number",
+                    "required": false,
+                    "example": "",
+                    "comment": "doubleNum"
+                },
+                {
+                    "key": "longNum",
+                    "type": "number",
+                    "required": false,
+                    "example": "",
+                    "comment": "longNum"
+                },
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": false,
+                    "example": "",
+                    "comment": "name"
+                },
+                {
+                    "key": "num",
+                    "type": "number",
+                    "required": false,
+                    "example": 233,
+                    "comment": "num"
+                },
+                {
+                    "key": "shortNum",
+                    "type": "number",
+                    "required": false,
+                    "example": "",
+                    "comment": "shortNum"
+                }
+            ],
+            "body": [
+                {
+                    "key": "doubleNum",
+                    "type": "number",
+                    "required": false,
+                    "example": "",
+                    "comment": "doubleNum"
+                },
+                {
+                    "key": "longNum",
+                    "type": "number",
+                    "required": false,
+                    "example": "",
+                    "comment": "longNum"
+                },
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": false,
+                    "example": "",
+                    "comment": "name"
+                },
+                {
+                    "key": "num",
+                    "type": "number",
+                    "required": false,
+                    "example": 233,
+                    "comment": "num"
+                },
+                {
+                    "key": "shortNum",
+                    "type": "number",
+                    "required": false,
+                    "example": "",
+                    "comment": "shortNum"
+                }
+            ],
+            "path": []
+        }
+    }
+}

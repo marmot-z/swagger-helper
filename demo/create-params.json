@@ -1,46 +1,151 @@
 {
-    "prodUrl": "/test/interface1",
-    "devUrl": "/test/interface1",
-    "name": "测试创建接口",
+    "_id": "60e11f1b79639c7aa6e0daca",
+    "prodUrl": "/test/temp",
+    "devUrl": "/test/temp",
+    "name": "【测试】测试接口",
     "group": "5fd975b50d276ef7764b6009",
-    "desc": "",
-    "creator": null,
-    "manager": null,
-    "follower": [],
+    "desc": null,
+    "creator": "60c2c4ece29bc90126805c20",
+    "manager": "60c2c4ece29bc90126805c20",
+    "url": "/test/temp",
+    "__v": 0,
+    "status": 1,
+    "isDeleted": false,
+    "modifiedTime": "1625366433325",
+    "createTime": "1625365602658",
+    "follower": [
+        "60c2c4ece29bc90126805c20"
+    ],
     "options": {
-        "proxy": {
-            "mode": 0
+        "params": {
+            "query": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": true,
+                    "comment": "名称",
+                    "example": "zhangsna"
+                },
+                {
+                    "key": "age",
+                    "type": "number",
+                    "required": true,
+                    "example": 12,
+                    "comment": "年龄"
+                },
+                {
+                    "key": "idList",
+                    "type": "string",
+                    "required": true,
+                    "example": "1,2",
+                    "comment": "编号列表"
+                },
+                {
+                    "key": "favitor",
+                    "type": "string",
+                    "required": true,
+                    "example": "游戏",
+                    "comment": "爱好"
+                }
+            ],
+            "body": [],
+            "path": []
         },
+        "delay": 0,
+        "method": "get",
         "response": [
             {
                 "status": 200,
                 "statusText": "status1",
                 "example": {
-                    "data": {
-                        "successful": true,
-                        "msg": "无"
+                    "data": [
+                        {
+                            "field1": "示例1",
+                            "field2": "示例2"
+                        }
+                    ],
+                    "code": 1,
+                    "msg": "error",
+                    "pageInfo": {
+                        "total": 100,
+                        "pages": 10
                     }
                 },
                 "params": [
                     {
                         "key": "data",
-                        "type": "object",
+                        "type": "array",
                         "required": true,
-                        "comment": "数据",
+                        "comment": null,
                         "params": [
                             {
-                                "key": "successful",
-                                "type": "boolean",
-                                "required": true,
-                                "example": true,
-                                "comment": "是否成功"
-                            },
-                            {
-                                "key": "msg",
+                                "key": "field1",
                                 "type": "string",
                                 "required": true,
-                                "example": "无",
-                                "comment": "消息"
+                                "example": "示例1",
+                                "comment": "字段1"
+                            },
+                            {
+                                "key": "field2",
+                                "type": "string",
+                                "required": true,
+                                "example": "示例2",
+                                "comment": "字段2"
+                            }
+                        ],
+                        "items": {
+                            "type": "object",
+                            "params": [
+                                {
+                                    "key": "field1",
+                                    "type": "string",
+                                    "required": true,
+                                    "example": "示例1",
+                                    "comment": "字段1"
+                                },
+                                {
+                                    "key": "field2",
+                                    "type": "string",
+                                    "required": true,
+                                    "example": "示例2",
+                                    "comment": "字段2"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "code",
+                        "type": "number",
+                        "required": true,
+                        "example": 1,
+                        "comment": "响应码"
+                    },
+                    {
+                        "key": "msg",
+                        "type": "string",
+                        "required": true,
+                        "example": "error",
+                        "comment": "错误信息"
+                    },
+                    {
+                        "key": "pageInfo",
+                        "type": "object",
+                        "required": true,
+                        "example": "分页信息",
+                        "params": [
+                            {
+                                "key": "total",
+                                "type": "number",
+                                "required": true,
+                                "example": 100,
+                                "comment": "总条数"
+                            },
+                            {
+                                "key": "pages",
+                                "type": "number",
+                                "required": true,
+                                "example": 10,
+                                "comment": "总页数"
                             }
                         ]
                     }
@@ -48,48 +153,157 @@
             }
         ],
         "responseIndex": 0,
+        "examples": {
+            "query": {
+                "name": "zhangsna",
+                "age": 12,
+                "idList": "1,2",
+                "favitor": "游戏"
+            },
+            "body": null,
+            "path": null
+        },
         "headers": {
             "example": null,
             "params": []
         },
-        "method": "get",
-        "delay": 0,
-        "examples": {
-            "query": null,
-            "body": null,
-            "path": null
-        },
-        "params": {
-            "query": [
-                {
-                    "key": "name",
-                    "type": "string",
-                    "required": true,
-                    "example": "wangwu",
-                    "comment": "密码",
-                    "maxLength": 11
-                }
-            ],
-            "body": [
-                {
-                    "key": "name",
-                    "type": "string",
-                    "required": true,
-                    "comment": "姓名",
-                    "example": "zhangsan",
-                    "maxLength": 12
-                },
-                {
-                    "key": "password",
-                    "type": "string",
-                    "required": false,
-                    "example": "1111",
-                    "comment": "密码",
-                    "maxLength": 4
-                }
-            ],
-            "path": []
+        "proxy": {
+            "mode": 0
         }
     },
-    "url": "/test/interface1"
+    "history": {
+        "_id": "60e11fa1bb96b93691aa1969",
+        "apiId": "60e11f1b79639c7aa6e0daca",
+        "__v": 0,
+        "updateTime": "2021-07-04T02:40:33.344Z",
+        "createTime": "2021-07-04T02:40:33.370Z",
+        "records": [
+            {
+                "operatorName": "zhangxunwei@dxy.cn",
+                "operator": "60c2c4ece29bc90126805c20",
+                "data": {
+                    "_id": "60e11f1b79639c7aa6e0daca",
+                    "prodUrl": "/test/temp",
+                    "devUrl": "/test/temp",
+                    "name": "【测试】测试接口",
+                    "group": "5fd975b50d276ef7764b6009",
+                    "desc": null,
+                    "creator": "60c2c4ece29bc90126805c20",
+                    "manager": "60c2c4ece29bc90126805c20",
+                    "url": "/test/temp",
+                    "__v": 0,
+                    "status": 1,
+                    "isDeleted": false,
+                    "modifiedTime": "1625366299471",
+                    "createTime": "1625366299471",
+                    "follower": [
+                        "60c2c4ece29bc90126805c20"
+                    ],
+                    "options": {
+                        "response": [
+                            {
+                                "status": 200,
+                                "statusText": "status1",
+                                "example": {
+                                    "data": {
+                                        "sex": 2,
+                                        "address": "浙江省"
+                                    },
+                                    "code": 1,
+                                    "msg": "error"
+                                },
+                                "params": [
+                                    {
+                                        "key": "data",
+                                        "type": "object",
+                                        "required": true,
+                                        "comment": null,
+                                        "params": [
+                                            {
+                                                "key": "sex",
+                                                "type": "number",
+                                                "required": true,
+                                                "example": 2,
+                                                "comment": "性别"
+                                            },
+                                            {
+                                                "key": "address",
+                                                "type": "string",
+                                                "required": true,
+                                                "example": "浙江省",
+                                                "comment": "地址"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key": "code",
+                                        "type": "number",
+                                        "required": true,
+                                        "example": 1,
+                                        "comment": "响应码"
+                                    },
+                                    {
+                                        "key": "msg",
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "error",
+                                        "comment": "错误信息"
+                                    }
+                                ]
+                            }
+                        ],
+                        "method": "get",
+                        "delay": 0,
+                        "params": {
+                            "query": [
+                                {
+                                    "key": "name",
+                                    "type": "string",
+                                    "required": true,
+                                    "comment": "名称",
+                                    "example": "zhangsna"
+                                },
+                                {
+                                    "key": "age",
+                                    "type": "number",
+                                    "required": true,
+                                    "example": 12,
+                                    "comment": "年龄"
+                                },
+                                {
+                                    "key": "id",
+                                    "type": "string",
+                                    "required": true,
+                                    "example": "1,2",
+                                    "comment": "编号列表"
+                                }
+                            ],
+                            "body": [],
+                            "path": []
+                        },
+                        "responseIndex": 0,
+                        "examples": {
+                            "query": {
+                                "name": "zhangsna",
+                                "age": 12,
+                                "id": "1,2"
+                            },
+                            "body": null,
+                            "path": null
+                        },
+                        "headers": {
+                            "example": null,
+                            "params": []
+                        },
+                        "proxy": {
+                            "mode": 0
+                        }
+                    }
+                },
+                "_id": "60e11fa1fa900e5f95b76d25",
+                "createTime": "2021-07-04T02:40:33.366Z"
+            }
+        ]
+    },
+    "author": "zhangxunwei@dxy.cn"
 }

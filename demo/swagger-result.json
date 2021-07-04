@@ -80,13 +80,54 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "additionalProperties": {
-                                    "type": "object"
-                                }
-                            }
+                            "$ref": "#/definitions/标准返回类«List«复杂对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/demo/method2222": {
+            "get": {
+                "tags": [
+                    "测试分类"
+                ],
+                "summary": "测试方法22222",
+                "operationId": "method2UsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "num",
+                        "in": "query",
+                        "description": "num",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "x-example": 233
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/标准返回类«复杂对象»"
                         }
                     },
                     "401": {
@@ -106,16 +147,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingGET",
+                "summary": "error",
+                "operationId": "errorUsingGET",
                 "produces": [
-                    "text/html"
+                    "*/*"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ModelAndView"
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
                         }
                     },
                     "401": {
@@ -133,19 +177,22 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingHEAD",
+                "summary": "error",
+                "operationId": "errorUsingHEAD",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "text/html"
+                    "*/*"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ModelAndView"
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
                         }
                     },
                     "204": {
@@ -163,19 +210,22 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingPOST",
+                "summary": "error",
+                "operationId": "errorUsingPOST",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "text/html"
+                    "*/*"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ModelAndView"
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
                         }
                     },
                     "201": {
@@ -196,19 +246,22 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingPUT",
+                "summary": "error",
+                "operationId": "errorUsingPUT",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "text/html"
+                    "*/*"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ModelAndView"
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
                         }
                     },
                     "201": {
@@ -229,16 +282,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingDELETE",
+                "summary": "error",
+                "operationId": "errorUsingDELETE",
                 "produces": [
-                    "text/html"
+                    "*/*"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ModelAndView"
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
                         }
                     },
                     "204": {
@@ -256,19 +312,22 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingOPTIONS",
+                "summary": "error",
+                "operationId": "errorUsingOPTIONS",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "text/html"
+                    "*/*"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ModelAndView"
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
                         }
                     },
                     "204": {
@@ -286,19 +345,22 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingPATCH",
+                "summary": "error",
+                "operationId": "errorUsingPATCH",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "text/html"
+                    "*/*"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ModelAndView"
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
                         }
                     },
                     "204": {
@@ -423,6 +485,84 @@
                 }
             },
             "title": "View"
+        },
+        "复杂对象": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "example": "场所1",
+                    "description": "address"
+                },
+                "amount": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 23.6,
+                    "description": "amount"
+                },
+                "names": {
+                    "type": "array",
+                    "example": "张三,李四",
+                    "description": "names",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2021-10-09",
+                    "description": "time"
+                }
+            },
+            "title": "复杂对象"
+        },
+        "标准返回类«List«复杂对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 200,
+                    "description": "code"
+                },
+                "data": {
+                    "type": "array",
+                    "example": [],
+                    "description": "data",
+                    "items": {
+                        "$ref": "#/definitions/复杂对象"
+                    }
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "错误",
+                    "description": "msg"
+                }
+            },
+            "title": "标准返回类«List«复杂对象»»"
+        },
+        "标准返回类«复杂对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 200,
+                    "description": "code"
+                },
+                "data": {
+                    "example": [],
+                    "description": "data",
+                    "$ref": "#/definitions/复杂对象"
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "错误",
+                    "description": "msg"
+                }
+            },
+            "title": "标准返回类«复杂对象»"
         }
     }
 }

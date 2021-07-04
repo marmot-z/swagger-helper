@@ -1,18 +1,18 @@
 {
-    "_id": "60db2616d59d7f011f417bab",
-    "prodUrl": "/test/interface1",
-    "devUrl": "/test/interface1",
-    "name": "测试创建接口",
+    "_id": "60e11c6257fc1e7a9a178ab6",
+    "prodUrl": "/test/temp",
+    "devUrl": "/test/temp",
+    "name": "【测试】测试接口",
     "group": "5fd975b50d276ef7764b6009",
-    "desc": "",
+    "desc": null,
     "creator": "60c2c4ece29bc90126805c20",
     "manager": "60c2c4ece29bc90126805c20",
-    "url": "/test/interface1",
+    "url": "/test/temp",
     "__v": 0,
     "status": 1,
     "isDeleted": false,
-    "modifiedTime": "1624974870537",
-    "createTime": "1624974870537",
+    "modifiedTime": "1625365602658",
+    "createTime": "1625365602658",
     "follower": [
         "60c2c4ece29bc90126805c20"
     ],
@@ -23,8 +23,14 @@
                 "statusText": "status1",
                 "example": {
                     "data": {
-                        "successful": true,
-                        "msg": "无"
+                        "sex": 2,
+                        "address": "浙江省"
+                    },
+                    "code": 1,
+                    "msg": "error",
+                    "pageInfo": {
+                        "total": 100,
+                        "pages": 10
                     }
                 },
                 "params": [
@@ -32,21 +38,57 @@
                         "key": "data",
                         "type": "object",
                         "required": true,
-                        "comment": "数据",
+                        "comment": null,
                         "params": [
                             {
-                                "key": "successful",
-                                "type": "boolean",
+                                "key": "sex",
+                                "type": "number",
                                 "required": true,
-                                "example": true,
-                                "comment": "是否成功"
+                                "example": 2,
+                                "comment": "性别"
                             },
                             {
-                                "key": "msg",
+                                "key": "address",
                                 "type": "string",
                                 "required": true,
-                                "example": "无",
-                                "comment": "消息"
+                                "example": "浙江省",
+                                "comment": "地址"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "code",
+                        "type": "number",
+                        "required": true,
+                        "example": 1,
+                        "comment": "响应码"
+                    },
+                    {
+                        "key": "msg",
+                        "type": "string",
+                        "required": true,
+                        "example": "error",
+                        "comment": "错误信息"
+                    },
+                    {
+                        "key": "pageInfo",
+                        "type": "object",
+                        "required": true,
+                        "example": "分页信息",
+                        "params": [
+                            {
+                                "key": "total",
+                                "type": "number",
+                                "required": true,
+                                "example": 100,
+                                "comment": "总条数"
+                            },
+                            {
+                                "key": "pages",
+                                "type": "number",
+                                "required": true,
+                                "example": 10,
+                                "comment": "总页数"
                             }
                         ]
                     }
@@ -61,41 +103,42 @@
                     "key": "name",
                     "type": "string",
                     "required": true,
-                    "example": "wangwu",
-                    "comment": "密码",
-                    "maxLength": 11
+                    "comment": "名称",
+                    "example": "zhangsna"
                 },
                 {
                     "key": "age",
                     "type": "number",
                     "required": true,
-                    "example": 23,
+                    "example": 12,
                     "comment": "年龄"
-                }
-            ],
-            "body": [
-                {
-                    "key": "name",
-                    "type": "string",
-                    "required": true,
-                    "comment": "姓名",
-                    "example": "zhangsan",
-                    "maxLength": 12
                 },
                 {
-                    "key": "password",
+                    "key": "idList",
                     "type": "string",
-                    "required": false,
-                    "example": "1111",
-                    "comment": "密码",
-                    "maxLength": 4
+                    "required": true,
+                    "example": "1,2",
+                    "comment": "编号列表"
+                },
+                {
+                    "key": "favitor",
+                    "type": "string",
+                    "required": true,
+                    "example": "游戏",
+                    "comment": "爱好"
                 }
             ],
+            "body": [],
             "path": []
         },
         "responseIndex": 0,
         "examples": {
-            "query": null,
+            "query": {
+                "name": "zhangsna",
+                "age": 12,
+                "idList": "1,2",
+                "favitor": "游戏"
+            },
             "body": null,
             "path": null
         },

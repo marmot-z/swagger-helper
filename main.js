@@ -1,33 +1,57 @@
 const request = require('request');
-const minmist = require("minimist");
+const inquirer = require('inquirer');
+const readline = require('readline');
+const {Page} = require('./page');
+const {CommandLine} = require('./command');
+const {Converter} = require('./convert');
 
-function getSwaggerInfo(path) {
-    let options = {
-        url: 'http://localhost:8080/v2/api-docs'
-    };
+const promptList = [{
+    type: 'input',
+    message: '请输入swagger文档地址:',
+    name: 'swaggerPath',
+    default: 'http://localhost:8080/v2/api-docs'
+}, {
+    type: 'input',
+    message: '请输入邮箱:',
+    name: 'email',
+    default: 'zhangxunwei@dxy.cn'
+}, {
+    type: 'password',
+    message: '请输入密码:',
+    name: 'password'
+}];
+
+console.log('请先登录Api Mocker：');
+inquirer.prompt(promptList).then(async (answers) => {
+    let page = new Page();
+    await page.login(answers.email, answers.password);
+    let swaggerDoc = await getSwaggerDocument(answers.swaggerPath);
+    let converter = new Converter(swaggerDoc);
+
+    initPrompt(new CommandLine(page, converter));
+});
+
+function initPrompt(commandline) {
+    let rl = readline.createInterface(process.stdin, process.stdout);
+    rl.setPrompt('swagger-helper > ');
+    rl.prompt();
+    rl.on('line', (line) => {
+        commandline.handle(line);
+        rl.prompt();
+    });
     
+    rl.on('close', () => process.exit(0)); 
+}
+
+function getSwaggerDocument(url) {
     return new Promise((resolve, reject) => {
-        request.get(options, function(err, response,  body) {
+        request(url, (err, response) => {
             if (err) {
                 reject(err);
+                return;
             }
 
-            let swaggerDocument = JSON.parse(response.body);
-
-            if (typeof path === 'undefined') {
-                resolve(swaggerDocument.paths);
-            } else {
-                let pathObj = swaggerDocument.paths[path];
-
-                if (typeof pathObj === 'undefined') {
-                    reject(new Error('没有 ' + path + ' 接口信息'));
-                }
-
-                resolve(pathObj);
-            }
+            resolve(JSON.parse(response.body));
         });
     });
 }
-
-let argv = minmist(process.argv);
-getSwaggerInfo(argv.p).then(console.log).catch(console.error);
