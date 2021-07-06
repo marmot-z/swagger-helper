@@ -144,16 +144,21 @@ function fill(obj, ds = {}, doc) {
     }
 
     if (isReferenceObj(obj)) {
+        let description = obj.description;
         key = getReferenceName(obj);
         obj =  getReferenceObj(obj, doc);
+
+        if (description) obj.description = description;
     }
 
-    Object.assign(ds, {
-        type: getStandardType(obj.type),
-        required: false,
-        comment: obj.description ? obj.description : '',
-        example: obj.example ? obj.example : ''
-    });
+    ds.type = getStandardType(obj.type);
+    if (typeof obj.description !== 'undefined') {
+        ds.comment = obj.description ? obj.description : '';
+        ds.required = false;
+    }
+    if (typeof obj.example !== 'undefined') {
+         ds.example = obj.example ? obj.example : '';
+    }
 
     if ('items' in obj) {
         ds.items = {};
@@ -194,7 +199,7 @@ function extract(obj, example) {
         } else {
             obj.example ? 
                 obj.example.split(',').forEach(v => example[obj.key].push(v)) :
-                example[obj.key].push(obj.example);
+                example[obj.key].push('value');
         }
     }
 
