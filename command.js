@@ -51,14 +51,14 @@ class CommandLine {
                     .option('a', {demand: true, describe: 'api id'})
                     .option('f', {demand: true, describe: '数据来源，使用swagger:/path格式获取对应path接口描述'})
                     .usage('Usage: updateApi -g -a -f') 
-                    .example('createApi -g xxx -a xxx -f swagger:/test/temp') 
+                    .example('updateApi -g xxx -a xxx -f swagger:/test/temp') 
                     .help('h');
             }, (argv) => this.page.updateApi(argv.g, argv.a, this.convertFromSwagger(argv.f, argv.g)))
             .command('deleteApi', 'delete api doc', (yargs) => {
                 yargs.option('g', {demand: true, describe: 'group id'})
                     .option('a', {demand: true, describe: 'api id'})
                     .usage('Usage: deleteApi -g -a') 
-                    .example('createApi -g xxx -a xxx') 
+                    .example('deleteApi -g xxx -a xxx') 
                     .help('h');
             }, (argv) => this.page.deleteApi(argv.g, argv.a))
             .argv;

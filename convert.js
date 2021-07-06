@@ -19,7 +19,7 @@ class Converter {
             "devUrl": path,
             "url": path,
             "group": group,
-            "desc": "",
+            "desc": null,
             "creator": null,
             "manager": null,
             "follower": [],
@@ -31,7 +31,7 @@ class Converter {
         }
 
         let methodInfo = pathInfo[matchMethod];
-        let name = `【${methodInfo.tags.join(' & ')}】 + ${methodInfo.summary}`;
+        let name = `【${methodInfo.tags.join(' & ')}】${methodInfo.summary}`;
         let params = this.packageParams(methodInfo.parameters);
         let paramsExample = this.packageParamsExample(methodInfo.parameters);
         let responses = this.packageResponses(methodInfo.responses);
@@ -49,6 +49,7 @@ class Converter {
                 },
                 "method": matchMethod,
                 "delay": 0,
+                "responseIndex": 0,
                 "examples": paramsExample,
                 params: params
             }
@@ -74,7 +75,7 @@ class Converter {
         let fields = obj.map(param => {
             return {
                 key: param.name,
-                type: this.getStandardType(param.type),
+                type: getStandardType(param.type),
                 required: param.required,
                 example: param["x-example"] ? param["x-example"] : '',
                 comment: param.description
@@ -95,16 +96,8 @@ class Converter {
         return {
             query: example,
             body: example,
-            path: []
+            path: null
         };
-    }
-
-    getStandardType(javaType) {
-        if ('integer' === javaType) {
-            return 'number';
-        }
-
-        return javaType;
     }
 
     packageResponses(obj) {
@@ -120,7 +113,7 @@ class Converter {
 
     packageResponseParams(obj) {
         if (typeof obj === 'undefined') {
-            return {};
+            return [];
         }
 
         let ds = {};
@@ -156,7 +149,7 @@ function fill(obj, ds = {}, doc) {
     }
 
     Object.assign(ds, {
-        type: obj.type,
+        type: getStandardType(obj.type),
         required: false,
         comment: obj.description ? obj.description : '',
         example: obj.example ? obj.example : ''
@@ -184,13 +177,13 @@ function extract(obj, example) {
         return;
     }
 
-    example[obj.key] = obj.example ? obj.example :
-                    obj.type === 'array' ? [] :
+    example[obj.key] =  obj.type === 'array' ? [] :
                     obj.type === 'object' ? {} : 
+                    obj.example ? obj.example :
                     obj.type === 'number' ? 0 : 
                     obj.type === 'string' ? '' : '';
 
-    if ('items' in obj) {
+    if (typeof obj.items !== 'undefined') {
         if ('params' in obj.items) {
             let o = {};
             example[obj.key][0] = o;
@@ -205,9 +198,27 @@ function extract(obj, example) {
         }
     }
 
-    if ('params' in obj) {
-        extract(obj.params, example[obj.key]);
+    if (typeof obj.params !== 'undefined') {
+        let o;
+        if (obj.type === 'array') {
+            o = {};
+            example[obj.key][0] = o;
+        } else {
+            o = example[obj.key];
+        }
+
+        for (let param of obj.params) {
+            extract(param, o);
+        }
     }
+}
+
+function getStandardType(javaType) {
+    if ('integer' == javaType) {
+        return 'number';
+    }
+
+    return javaType;
 }
 
 function isReferenceObj(obj) {
