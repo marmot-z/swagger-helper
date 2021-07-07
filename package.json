@@ -11,9 +11,9 @@
     "url": "git+https://github.com/marmot-z/swagger-helper.git"
   },
   "dependencies": {
-    "request": "^2.88.2",
-    "inquirer": "^8.1.1",
-    "yargs": "^17.0.1"
+    "request": "2.88.2",
+    "inquirer": "8.1.1",
+    "yargs": "17.0.1"
   },
   "keywords": [],
   "author": "",
