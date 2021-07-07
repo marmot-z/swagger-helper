@@ -9,6 +9,13 @@ class Converter {
         return this.convertPath(path, this.document.paths[path], group)
     }
 
+    getOriginData(path) {
+        let pathInfo = this.document.paths[path];
+        let matchMethod = this.getFirstMatchMethodInfo(pathInfo);
+
+        return matchMethod === null ? {} : pathInfo[matchMethod];
+    }
+
     convertPath(path, pathInfo, group) {
         if (typeof pathInfo === 'undefined') {
             return {};
@@ -27,7 +34,7 @@ class Converter {
 
         let matchMethod = this.getFirstMatchMethodInfo(pathInfo);
         if (matchMethod === null) {
-            return params;
+            return {};
         }
 
         let methodInfo = pathInfo[matchMethod];
@@ -83,7 +90,7 @@ class Converter {
         });
 
         return {
-            query: fields,
+            query: [],
             body: fields,
             path: []
         };
@@ -94,7 +101,7 @@ class Converter {
         obj.forEach(param => example[param.name] = param["x-example"] ? param["x-example"] : '');
 
         return {
-            query: example,
+            query: null,
             body: example,
             path: null
         };

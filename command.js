@@ -28,6 +28,16 @@ class CommandLine {
 
     handle(command) {
         yargs(command)
+            .command('print', 'print data struct', (yargs) => {
+                yargs.option('f', {demand: true, describe: '数据来源，使用swagger:/path格式获取对应path接口描述'})
+                    .option('c', {describe: '是否转换成Api Mocker的数据结构（不需要传值）'})
+                    .usage('Usage: print -f [-c]') 
+                    .example('print -f swagger:/xxx/path -c') 
+                    .help('h');
+            }, (argv) => {
+                let o = ('c' in argv) ? this.convertFromSwagger(argv.f, '') : this.converter.getOriginData(getSwaggerPath(argv.f));
+                console.log(JSON.stringify(o));
+            })
             .command('listGroup', 'list all group', (yargs) => {}, () => this.page.listGroup())
             .command('listApi', 'list all group', (yargs) => {
                 yargs.option('g', {describe: 'group id'})
@@ -65,14 +75,18 @@ class CommandLine {
     }
 
     convertFromSwagger(from, group) {
-        if (!/swagger:.*/.test(from)) {
-            throw new Error('不合法的格式，正确格式应为swagger:/xxx/path');
-        }
-    
-        let path = /swagger:(.*)/.exec(from)[1];
+        let path = getSwaggerPath(from);
 
         return this.converter.convert(path, group);
     }
+}
+
+function getSwaggerPath(from) {
+    if (!/swagger:.*/.test(from)) {
+        throw new Error('不合法的格式，正确格式应为swagger:/xxx/path');
+    }
+
+    return /swagger:(.*)/.exec(from)[1];
 }
 
 module.exports.CommandLine = CommandLine;
