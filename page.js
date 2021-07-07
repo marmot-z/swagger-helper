@@ -52,18 +52,18 @@ class Page {
             return;
         }
 
-        return this.commonRequest(Page.listGroupUrl)
-                .then(response => {
-                    let val = JSON.parse(response.body);
-                    this.groups = val.resources;
-                    this.groupMap = {};
-                    this.groups.forEach(group => this.groupMap[group._id] = group);
+        this.commonRequest(Page.listGroupUrl)
+            .then(response => {
+                let val = JSON.parse(response.body);
+                this.groups = val.resources;
+                this.groupMap = {};
+                this.groups.forEach(group => this.groupMap[group._id] = group);
 
-                    this.printGroupInfo();
-                }) 
-                .catch(err => {
-                    console.error('展示group列表失败', err);
-                });
+                this.printGroupInfo();
+            }) 
+            .catch(err => {
+                console.error('展示group列表失败', err);
+            });
     }
 
     listApi(groupId, pageSize = 10, pageIndex = 1) {
@@ -85,7 +85,9 @@ class Page {
                     console.error(`获取${pageIndex}页的api文档失败`);
                 }
             })
-            .catch(err => console.error(`获取${pageIndex}页的api文档失败`, err));
+            .catch(err => {
+                console.error(`获取${pageIndex}页的api文档失败`, err);
+            });
     }
 
     listOwnerApi(pageSize = 10, pageIndex = 1) {
@@ -101,7 +103,9 @@ class Page {
                     console.error(`获取${pageIndex}页自己创建的api文档失败`);
                 }
             })
-            .catch(err => console.error(`获取${pageIndex}页自己创建的api文档失败`, err));
+            .catch(err => {
+                console.error(`获取${pageIndex}页自己创建的api文档失败`, err);
+            });
     }
 
     createApi(groupId, params) {
@@ -117,18 +121,18 @@ class Page {
         let url = Page.createApiUrl.replace('%s', groupId);
         
         this.commonRequest(url, 'post', params, operationHeaders)
-                .then(response => {
-                    if (response.statusCode != 200) {
-                        console.error(`新增 ${params.name} API文档失败，响应结果：
-                                      \n 编码：${response.statusCode}
-                                      \n 内容：${response.body}`);
-                    } else {
-                        console.info(`新增 ${params.name} API文档成功`)
-                    }
-                })
-                .catch(err => {
-                    console.error(`新增 ${params.name} API文档失败`, err);
-                });
+            .then(response => {
+                if (response.statusCode != 200) {
+                    console.error(`新增 ${params.name} API文档失败，响应结果：
+                                \n 编码：${response.statusCode}
+                                \n 内容：${response.body}`);
+                } else {
+                    console.info(`新增 ${params.name} API文档成功`)
+                }
+            })
+            .catch(err => {
+                console.error(`新增 ${params.name} API文档失败`, err);
+            });
     }
 
     updateApi(groupId, apiId, params) {

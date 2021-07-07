@@ -47,7 +47,7 @@ class CommandLine {
                     .example('listApi -g xxx -i 1 -n 10') 
                     .help('h');
             }, (argv) => {
-                argv.g ? this.page.listApi(g, argv.n, arg.i) : this.page.listOwnerApi(argv.n, argv.i); 
+                argv.g ? this.page.listApi(argv.g, argv.n, argv.i) : this.page.listOwnerApi(argv.n, argv.i); 
             })
             .command('createApi', 'create api doc', (yargs) => {
                 yargs.option('g', {demand: true, describe: 'group id'})

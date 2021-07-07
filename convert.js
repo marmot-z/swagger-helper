@@ -11,7 +11,7 @@ class Converter {
 
     getOriginData(path) {
         let pathInfo = this.document.paths[path];
-        let matchMethod = this.getFirstMatchMethodInfo(pathInfo);
+        let matchMethod = getFirstMatchMethodInfo(pathInfo);
 
         return matchMethod === null ? {} : pathInfo[matchMethod];
     }
@@ -32,7 +32,7 @@ class Converter {
             "follower": [],
         };
 
-        let matchMethod = this.getFirstMatchMethodInfo(pathInfo);
+        let matchMethod = getFirstMatchMethodInfo(pathInfo);
         if (matchMethod === null) {
             return {};
         }
@@ -40,7 +40,7 @@ class Converter {
         let methodInfo = pathInfo[matchMethod];
         let name = `【${methodInfo.tags.join(' & ')}】${methodInfo.summary}`;
         let params = this.packageParams(methodInfo.parameters);
-        let paramsExample = this.packageParamsExample(methodInfo.parameters);
+        let paramsExample = this.packageParamsExample(params.body);
         let responses = this.packageResponses(methodInfo.responses);
 
         Object.assign(obj, {
@@ -65,28 +65,25 @@ class Converter {
         return obj;
     }
 
-    getFirstMatchMethodInfo(obj) {
-        if (typeof obj === 'undefined') {
-            return null;
-        }
-
-        let matchMethod = methods.find(method => {
-            return typeof obj[method] !== 'undefined' ||
-                typeof obj[method.toUpperCase()] !== 'undefined';
-        });
-        
-        return typeof matchMethod === 'undefined' ? null : matchMethod;
-    }
-
     packageParams(obj) {
         let fields = obj.map(param => {
-            return {
+            let o = {
                 key: param.name,
                 type: getStandardType(param.type),
                 required: param.required,
                 example: param["x-example"] ? param["x-example"] : '',
                 comment: param.description
             };
+
+            if (isComplexParam(param)) {
+                let ds = {};
+                fill(param.schema, ds, this.document);
+
+                o.params = ds.params;
+                o.type = ds.type;
+            }
+
+            return o;
         });
 
         return {
@@ -96,9 +93,16 @@ class Converter {
         };
     }
 
-    packageParamsExample(obj) {
+    packageParamsExample(params) {
+        if (typeof params === 'undefined') {
+            return {};
+        }
+
         let example = {};
-        obj.forEach(param => example[param.name] = param["x-example"] ? param["x-example"] : '');
+
+        for (let param of params) {
+            extract2Example(param, example);
+        }
 
         return {
             query: null,
@@ -138,12 +142,12 @@ class Converter {
         let example = {};
 
         for (let param of params) {
-            extract(param, example);
+            extract2Example(param, example);
         }
 
         return example;
     }
-}
+} 
 
 function fill(obj, ds = {}, doc) {
     if (typeof obj === 'undefined') {
@@ -184,7 +188,7 @@ function fill(obj, ds = {}, doc) {
     }
 }
 
-function extract(obj, example) {
+function extract2Example(obj, example) {
     if (typeof obj === 'undefined') {
         return;
     }
@@ -201,7 +205,7 @@ function extract(obj, example) {
             example[obj.key][0] = o;
     
             for (let param of obj.items.params) {
-                extract(param, o);
+                extract2Example(param, o);
             }
         } else {
             obj.example ? 
@@ -220,7 +224,7 @@ function extract(obj, example) {
         }
 
         for (let param of obj.params) {
-            extract(param, o);
+            extract2Example(param, o);
         }
     }
 }
@@ -231,6 +235,23 @@ function getStandardType(javaType) {
     }
 
     return javaType;
+}
+
+function isComplexParam(obj) {
+    return 'schema' in obj && isReferenceObj(obj.schema);
+}
+
+function getFirstMatchMethodInfo(obj) {
+    if (typeof obj === 'undefined') {
+        return null;
+    }
+
+    let matchMethod = methods.find(method => {
+        return typeof obj[method] !== 'undefined' ||
+            typeof obj[method.toUpperCase()] !== 'undefined';
+    });
+    
+    return typeof matchMethod === 'undefined' ? null : matchMethod;
 }
 
 function isReferenceObj(obj) {

@@ -13,8 +13,7 @@ const promptList = [{
 }, {
     type: 'input',
     message: '请输入邮箱:',
-    name: 'email',
-    default: 'zhangxunwei@dxy.cn'
+    name: 'email'
 }, {
     type: 'password',
     message: '请输入密码:',
@@ -23,23 +22,19 @@ const promptList = [{
 
 console.log('请先登录Api Mocker：');
 inquirer.prompt(promptList).then(async (answers) => {
-    let page = new Page();
-    await page.login(answers.email, answers.password);
     let swaggerDoc = await getSwaggerDocument(answers.swaggerPath);
     let converter = new Converter(swaggerDoc);
-
+    let page = new Page();
     initPrompt(new CommandLine(page, converter));
+
+    await page.login(answers.email, answers.password);
 });
 
 function initPrompt(commandline) {
     let rl = readline.createInterface(process.stdin, process.stdout);
+
     rl.setPrompt('swagger-helper > ');
-    rl.prompt();
-    rl.on('line', (line) => {
-        commandline.handle(line);
-        rl.prompt();
-    });
-    
+    rl.on('line', (line) => commandline.handle(line));
     rl.on('close', () => process.exit(0)); 
 }
 
