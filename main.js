@@ -9,7 +9,7 @@ const promptList = [{
     type: 'input',
     message: '请输入swagger文档地址:',
     name: 'swaggerPath',
-    default: 'http://localhost:8080/v2/api-docs'
+    default: 'http://localhost:8080/v2/api-docs?group=Admin'
 }, {
     type: 'input',
     message: '请输入邮箱:',

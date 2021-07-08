@@ -7,10 +7,10 @@
  *              -n          页大小  
  *              -i          页数
  * createApi -f -g          创建api
- *              -f          数据来源（默认使用swagger来源）
+ *              -f          数据来源（使用swagger来源，格式为swagger:/api/path）
  *              -g          group id
  * updateApi -f -a -g       更新api
- *              -f          数据来源（默认使用swagger来源）
+ *              -f          数据来源（使用swagger来源，格式为swagger:/api/path）
  *              -a          api id
  *              -g          group id
  * deleteApi -g -a          删除api
